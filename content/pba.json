@@ -1,0 +1,383 @@
+{
+  "pba": {
+    "status": "ACTIVE",
+    "authorInfo": {
+      "author": "AIA",
+      "email": "aia@ericsson.com",
+      "publishingDate": "07/02/2018 10:47:00",
+      "location": "Athlone"
+    },
+    "templateInfo": {
+      "id": "87b87dc6-2b8f-4d45-9ab3-77177511ca40",
+      "name": "flink-streaming",
+      "title": "Flink Streaming",
+      "version": "1.0.17",
+      "description": "Flink Streaming Template to simplify the Flink Kafka streaming application development complexities, it provides generated driver java class, allowing developer to focus on business logic implementation. It Supports a variety of data Sources, Sinks, and formats.  For more information, visit documentation."
+    },
+    "icon": "\u003cicon path\u003e",
+    "scmInfo": {
+      "scm": "",
+      "scmTag": ""
+    },
+    "processorInfo": {
+      "id": "676f2066-7563-6b20-796f-757273656c66",
+      "technology": "Flink",
+      "version": "1.2.1"
+    },
+    "extensionPoints": [
+      {
+        "technology": "jdbc-mysql",
+        "description": "The MySQL data source reads data from a specified table within a MySQL database",
+        "name": "DataSource_jdbc_mysql",
+        "uri": {
+          "protocol": "jdbc://",
+          "address": "connection url",
+          "args": [{
+            "key": "format",
+            "value": [],
+            "default": ""
+          }]
+        },
+        "attributes": [{
+          "key": "password",
+          "value": "<password>",
+          "isReadOnly": false,
+          "help": "The password used to connect to the MySQL database",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "user",
+          "value": "<user-name>",
+          "isReadOnly": false,
+          "help": "The username used to connect to the MySQL database",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "driver",
+          "value": "com.mysql.jdbc.Driver",
+          "isReadOnly": false,
+          "help": "The JDBC driver class that implements the java.sql.Driver interface",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "table.name",
+          "value": "<table-name>",
+          "isReadOnly": false,
+          "help": "The name of the table to read from",
+          "isRequired": false,
+          "type": "string"
+        }],
+        "id": "03ac8217-a01b-49ce-bc54-50c535e96672"
+      },
+      {
+        "technology": "PostgreSQL",
+        "description": "Jdbc Postgress SQL",
+        "name": "DataSource_jdbc_postgresssql_9.x",
+        "uri": {
+          "protocol": "jdbc://",
+          "address": "localhost:5432",
+          "args": [{
+            "key": "format",
+            "value": [],
+            "default": ""
+          }]
+        },
+        "attributes": [{
+          "key": "password",
+          "value": "<password>",
+          "isReadOnly": false,
+          "help": "The PostgreSQL database user's password.",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "user",
+          "value": "<user-name>",
+          "isReadOnly": false,
+          "help": "The username used to connect to the PostgreSQL database.",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "driver",
+          "value": "org.postgresql.Driver",
+          "isReadOnly": true,
+          "help": "The JDBC driver class that implements the java.sql.Driver interface.",
+          "isRequired": true,
+          "type": "string"
+        }, {
+          "key": "table.name",
+          "value": "<table-name>",
+          "isReadOnly": false,
+          "help": "The name of the table to read from",
+          "isRequired": false,
+          "type": "string"
+        }],
+        "id": "275a4a67-ec5e-4c67-b31e-bce81a77d193"
+      },
+      {
+        "technology": "kafka",
+        "description": "Consuming from kafka topic",
+        "name": "kafka-input",
+        "uri": {
+          "protocol": "kafka://",
+          "address": "\u003ctopic_name\u003e",
+          "args": [
+            {
+              "key": "format",
+              "value": [
+                  "String",
+                  "Avro",
+                  "Binary"
+              ]
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "key": "bootstrap.servers",
+            "value": "localhost:9092",
+            "regex": ".*",
+            "isReadOnly": false,
+            "help": "A list of host/port pairs to use for establishing the initial connection to the Kafka cluster. The client will make use of all servers irrespective of which servers are specified here for bootstrapping—this list only impacts the initial hosts used to discover the full set of servers. This list should be in the form host1:port1,host2:port2,...",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "group.id",
+            "value": "\u003cgroup_1\u003e",
+            "isReadOnly": false,
+            "help": "A unique string that identifies the consumer group this consumer belongs to. This property is required if the consumer uses either the group management functionality by using subscribe(topic) or the Kafka-based offset management strategy.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "deserialization.schema",
+            "value": "org.apache.flink.streaming.util.serialization.SimpleStringSchema",
+            "isReadOnly": false,
+            "help": "This attribute represents de serialisation schema for events coming from kafka to convert them to Generic Records.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "partition.assignment.strategy",
+            "value": "org.apache.kafka.clients.consumer.RangeAssignor",
+            "isReadOnly": false,
+            "help": "This attribute represents partition assignment strategy.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "schemaRegistry.address",
+            "value": "http://localhost:8081",
+            "isReadOnly": false,
+            "help": "This attribute represents the address of the schema registry.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "schemaRegistry.cacheMaximumSize",
+            "value": "500000",
+            "isReadOnly": false,
+            "help": "This attribute represents the cache size to be used by schema registry.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "eventType",
+            "value": "celltrace.s.ab11.INTERNAL_PER_UE_TRAFFIC_REP",
+            "isReadOnly": false,
+            "help": "This attribute represents type of events sent from Kafka.",
+            "isRequired": true,
+            "type": "string"
+          }
+        ],
+        "id": "3feacdb8-e8e6-45c5-8e85-96a6b95d4e18"
+      }
+    ],
+    "integrationPoints": [
+      {
+        "technology": "mysql",
+        "description": "The MySQL data sink writes data to a specified table within a MySQL database",
+        "name": "DataSink_jdbc_mysql",
+        "uri": {
+          "protocol": "jdbc://",
+          "address": "connection url",
+          "args": [{
+            "key": "format",
+            "value": [],
+            "default":""
+          }]
+        },
+        "attributes": [{
+          "key": "password",
+          "value": "<password>",
+          "isReadOnly": false,
+          "help": "The password used to connect to the My SQL database",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "user",
+          "value": "<user-name>",
+          "isReadOnly": false,
+          "help": "The username used to connect to the My SQL database",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "driver",
+          "value": "com.mysql.jdbc.Driver",
+          "isReadOnly": false,
+          "help": "The JDBC driver class that implements the java.sql.Driver interface",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "table.name",
+          "value": "<table-name>",
+          "isReadOnly": false,
+          "help": "The name of the table to write to",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "output.schema",
+          "value": "com.ericsson.component.aia.services.bps.flink.test.app.TableSchemaPojo",
+          "isReadOnly": false,
+          "help": "Schema provided for database in order to create a table.",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "data.save.mode",
+          "value": "Append",
+          "isReadOnly": false,
+          "help": "Persisted data to be saved in jdbc database.",
+          "isRequired": false,
+          "type": "string"
+        }],
+        "id": "03ac8217-a01b-49ce-bc54-50c535e96672"
+      },
+      {
+        "technology": "PostgreSQL",
+        "description": "Jdbc Postgress sql for data sink",
+        "name": "DataSink_jdbc_postgresssql_9.x",
+        "uri": {
+          "protocol": "jdbc://",
+          "address": "localhost:5432",
+          "args": [{
+            "key": "format",
+            "value": [],
+            "default":""
+          }]
+        },
+        "attributes": [{
+          "key": "password",
+          "value": "<password>",
+          "isReadOnly": false,
+          "help": "The PostgreSQL database user's password.",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "user",
+          "value": "<user-name>",
+          "isReadOnly": false,
+          "help": "The PostgreSQL database user on whose behalf the connection is being made.",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "driver",
+          "value": "org.postgresql.Driver",
+          "isReadOnly": true,
+          "help": "The JDBC driver class that implements the java.sql.Driver interface",
+          "isRequired": true,
+          "type": "string"
+        }, {
+          "key": "table.name",
+          "value": "<table-name>",
+          "isReadOnly": false,
+          "help": "The name of the table to write to",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "output.schema",
+          "value": "com.ericsson.component.aia.services.bps.flink.test.app.TableSchemaPojo",
+          "isReadOnly": false,
+          "help": "Schema provided for database in order to create a table.",
+          "isRequired": false,
+          "type": "string"
+        }, {
+          "key": "data.save.mode",
+          "value": "Append",
+          "isReadOnly": false,
+          "help": "Persisted data to be saved in jdbc database.",
+          "isRequired": false,
+          "type": "string"
+        }],
+        "id": "275a4a67-ec5e-4c67-b31e-bce81a77d193"
+      },
+      {
+        "technology": "kafka",
+        "description": "publishing to kafka topic",
+        "name": "kafka-output",
+        "uri": {
+          "protocol": "kafka://",
+          "address": "\u003ctopic_name\u003e",
+          "args": [
+            {
+              "key": "format",
+              "value": [
+                  "String",
+                  "Avro",
+                  "Binary"
+              ]
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "key": "bootstrap.servers",
+            "value": "localhost:9092",
+            "isReadOnly": false,
+            "help": "A list of host/port pairs to use for establishing the initial connection to the Kafka cluster. The client will make use of all servers irrespective of which servers are specified here for bootstrapping—this list only impacts the initial hosts used to discover the full set of servers. This list should be in the form host1:port1,host2:port2,...",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "serialization.schema",
+            "value": "org.apache.flink.streaming.util.serialization.SimpleStringSchema",
+            "isReadOnly": false,
+            "help": "This attribute represents serialization schema for generic records.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "schemaRegistry.address",
+            "value": "http://localhost:8081",
+            "isReadOnly": false,
+            "help": "This attribute represents the address of the schema registry.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "schemaRegistry.cacheMaximumSize",
+            "value": "500000",
+            "isReadOnly": false,
+            "help": "This attribute represents the cache size to be used by schema registry.",
+            "isRequired": true,
+            "type": "string"
+          },
+          {
+            "key": "eventType",
+            "value": "celltrace.s.ab11.INTERNAL_PER_UE_TRAFFIC_REP",
+            "isReadOnly": false,
+            "help": "This attribute represents type of events sent from Kafka.",
+            "isRequired": true,
+            "type": "string"
+          }
+        ],
+        "id": "3feacdb8-e8e6-45c5-8e85-96a6b95d4e18"
+      }
+    ],
+    "buildInfo": {
+      "dependencies": [
+        "3feacdb8-e8e6-45c5-8e85-96a6b95d4e18",
+        "3feacdb8-e8e6-45c5-8e85-96a6b95d4e18"
+      ]
+    }
+  }
+}
